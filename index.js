@@ -8,9 +8,17 @@ function load_md(location)
 	/** @type {string} */
 	let rel_loc = location.hash;
 	if (rel_loc == ""){
-		rel_loc = "#README";
+		rel_loc = "#index";
 	}
-	fetch(`https://raw.githubusercontent.com/GiftedR/GiftedR.github.io/refs/heads/development/pages/${rel_loc.replace("#", "")}.md`)
+
+	let fet_url = "https://raw.githubusercontent.com/GiftedR/GiftedR.github.io/refs/heads/development/";
+
+	if (location.host == "127.0.0.1:5500")
+	{
+		fet_url = "http://127.0.0.1:5500/";
+	}
+
+	fetch(`${fet_url}pages/${rel_loc.replace("#", "")}.md`)
 		.then((response) => {
 			if (!response.ok) {
 				throw new Error(`HTTP error: ${response.status}`);
